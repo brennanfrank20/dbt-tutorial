@@ -2,20 +2,35 @@
 version: 2
 
 models:
-  - name: my_first_dbt_model
-    description: "A starter dbt model"
+  - name: warehouses
+    description: "all FCs we track"
     columns:
-      - name: id
+      - name: region_id
+        description: "Region ID (int.)"
+      - name: physical_country
+        description: "Country abbreviation"
+      - name: warehouse_id
         description: "The primary key for this table"
         tests:
           - unique
           - not_null
+      - name: site_type
+        description: "the type of FC (ARS, TSSL)"
+    
 
-  - name: my_second_dbt_model
-    description: "A starter dbt model"
+
+
+  - name: bins_dump
+    description: "bin level data by day"
     columns:
-      - name: id
+      - name: region_id
+        description: "Region ID (int.)"
+      - name: physical_country
+        description: "Country abbreviation"
+      - name: warehouse_id
         description: "The primary key for this table"
         tests:
           - unique
           - not_null
+      - name: site_type
+        description: "the type of FC (ARS, TSSL)"
