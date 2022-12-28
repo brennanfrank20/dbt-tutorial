@@ -11,25 +11,7 @@ bins_dump as (
 ),
 
 bays_dump as (
-    select 
-        
-        TRUNC(snapshot_day) AS snapshot_day
-        , warehouse_id
-        , bin_id
-        , COALESCE(bay_type, 'OTHER') as bay_type
-        , COALESCE(bin_type, 'OTHER') as bin_type
-        , substring(bin_id, 1, 5) as mod
-        
-        , avg(capacity) as capacity
-        , avg(target_utilization) as target_utilization
-        , sum(total_inventory_volume) as cube
-        , sum(gross_bin_volume) as gross_bin_volume
-        , sum(total_units) as units
-
-        , TRUNC(snapshot_day) + warehouse_id + bin_id as mrg_key
-
-    from {{ref('stg_capacity_utilization')}} 
-    group by 1,2,3,4,5,6
+    select * from {{ref('stg_bays_dump')}} 
 ),
 
 ----- this combines the bin level data with the bay level (capacity) data -----
@@ -50,13 +32,6 @@ bin_tbl as (
             WHEN bin.cumulative_height > 65 THEN 'High_Floor'
             ELSE 'Floor'
           END AS bin_height_category
-        
-
-        , cu.target_utilization
-        , cu.capacity
-        , cu.cube 
-        , cu.units
-        , cu.gross_bin_volume        
 
         , bin.mrg_key
     FROM (

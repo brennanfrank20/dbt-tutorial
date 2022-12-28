@@ -64,7 +64,16 @@ models:
       - name: mrg_key
         description: "primary key"
 
-
+  - name: stg_bays_dump
+    description: "bay level data for each bin ID"
+    columns:
+      - name: snapshot_day
+      - name: warehouse_id
+      - name: bin_id
+      - name: bay_type
+      - name: mrg_key
+        description: "primary key"
+    
 
   - name: core_bin_tbl
     description: "combines bin ID level and capacity (+baytype) data"
@@ -79,11 +88,6 @@ models:
       - name: cumulative_height
       - name: total_height
       - name: bin_height_category
-      - name: target_utilization
-      - name: capacity
-      - name: cube
-      - name: units
-      - name: gross_bin_volume
       - name: mrg_key
 
 
