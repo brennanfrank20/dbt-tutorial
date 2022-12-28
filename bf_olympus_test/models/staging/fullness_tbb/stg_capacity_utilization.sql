@@ -33,7 +33,6 @@
     where true
         and cu.region_id = 3
         AND cu.snapshot_day = '2022-12-15'
-    group by 1,2,3,4,5
 
 
 
