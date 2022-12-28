@@ -26,6 +26,8 @@ models:
       - name: warehouse_id
       - name: pick_area_name
       - name: bin_id
+      - name: is_locked
+      - name: bin_usage_name      
       - name: bin_type_name
       - name: bin_bay
       - name: bin_module
@@ -60,6 +62,7 @@ models:
       - name: bay_type
       - name: aisle_number
       - name: aisle
+      - name: floor
       - name: pick_mod
       - name: mrg_key
         description: "primary key"
@@ -85,10 +88,30 @@ models:
       - name: bay_type
       - name: bin_id
       - name: bin_type_name
+      - name: bin_usage_name
+      - name: is_locked
       - name: cumulative_height
       - name: total_height
       - name: bin_height_category
       - name: mrg_key
+
+
+  - name: core_fullness
+    description: "combines bin ID level and capacity (+baytype) data"
+    columns:
+      - name: balance_date
+      - name: warehouse_id
+      - name: bay_type
+      - name: bin_type
+      - name: bin_height_category
+      - name: mod
+      - name: is_locked
+      - name: fullness
+      - name: target_utilization
+      - name: cube
+      - name: capacity   
+      - name: gross_bin_volume
+      - name: units
 
 
       

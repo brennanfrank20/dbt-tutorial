@@ -2,11 +2,8 @@
     This script creates a bin_tbl, which pulls from bins_dump, and joins the bay types from capacity utilization
 */
 
-with warehouses as (
-    select * from {{ref('stg_warehouses')}}
-),
 
-bins_dump as (
+with bins_dump as (
     select * from {{ref('stg_bins_dump')}}
 ),
 
@@ -24,6 +21,8 @@ bin_tbl as (
         , cu.bay_type
         , bin.bin_id
         , bin.bin_type_name
+        , bin.bin_usage_name
+        , bin.is_locked
         , bin.cumulative_height
         , bin.total_height
         , CASE
@@ -34,6 +33,7 @@ bin_tbl as (
           END AS bin_height_category
 
         , bin.mrg_key
+
     FROM (
         SELECT
               a.snapshot_day
@@ -45,6 +45,8 @@ bin_tbl as (
             , a.rack
             , a.shelf
             , a.bin_type_name
+            , a.bin_usage_name
+            , a.is_locked
             , a.mrg_key
             , SUM(a.bin_height) OVER (PARTITION BY a.rack ORDER BY a.shelf ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS cumulative_height
             , SUM(a.bin_height) OVER (PARTITION BY a.rack ) AS total_height
