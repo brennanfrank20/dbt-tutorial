@@ -1,0 +1,14 @@
+version: 2
+
+sources:
+  - name: bf_olympus_test
+    database: ww_ops_aces_dd
+    schema: olympus_testing
+    tables:
+      - name: warehouses
+      - name: bins_dump
+      - name: capacity_utilization
+
+
+
+      

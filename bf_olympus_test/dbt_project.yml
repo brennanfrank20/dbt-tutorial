@@ -38,11 +38,12 @@ models:
   bf_olympus_test:
     # Config indicated by + and applies to all files under models/staging/
     staging:
-      +materialized: table
-      +schema: staging # this creates a schema called test_cbrs_sp_staging. the beginning is concatenated from profiles.yml
+      +schema: staging # this creates a schema called test_cbrs_sp_staging. the beginning is concatenated from profiles.yml. then updated in macro to remove that.
+      +materialized: table # youtube guy said "view" here for staging tables? 
     marts:
       core:
         +schema: core
+        +materialized: table
       reporting:
         +schema: reporting
 

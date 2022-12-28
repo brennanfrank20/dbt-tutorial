@@ -27,7 +27,7 @@ with warehouses as (
             when 'SA' then 5
         	when 'ECCF' then 5
             end as regionid
-        from test_brs_storedproc.dat_brs_ranking_group_eb_update
+        from {{ source('bf_olympus_testing', 'warehouses') }}
         where scenario_id=41 --and upper(site_type) in ('TSSL', 'TNS')
         group by 1,2,3,4
     ) x where regionid in (3) --and warehouse_id='TYO2'
