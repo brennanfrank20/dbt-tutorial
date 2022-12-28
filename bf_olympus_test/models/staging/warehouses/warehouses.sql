@@ -7,8 +7,8 @@
     Try changing "table" to "view" below
 */
 
+-- Example with one sort key
 {{ config(materialized='table') }}
-
 
 with warehouses as (
 

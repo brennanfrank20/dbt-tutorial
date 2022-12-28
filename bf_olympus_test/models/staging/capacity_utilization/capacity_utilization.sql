@@ -1,5 +1,7 @@
 
-{{ config(materialized='table') }}
+-- capacity utilization staging table
+
+    {{ config(materialized='table', sort=['warehouse_id', 'snapshot_day']) }}
 
 
 
@@ -15,3 +17,8 @@
         and cu.region_id =3
         AND cu.snapshot_day = '2022-12-15'
     group by 1,2,3,4,5
+
+
+
+
+

@@ -1,3 +1,4 @@
+-- bins dump staging table
 
 /*
     Welcome to your second dbt model!
@@ -7,8 +8,9 @@
     Try changing "table" to "view" below
 */
 
-{{ config(materialized='table') }}
 
+-- Example with multiple sort keys
+{{ config(materialized='table', sort=['warehouse_id', 'snapshot_day']) }}
 
 -- Use the `ref` function to select from other models
 
