@@ -28,12 +28,12 @@ clean-targets:         # directories to be removed by `dbt clean`
 # Configuring models
 # Full documentation: https://docs.getdbt.com/docs/configuring-models
 
-# In this example config, we tell dbt to build all models in the example/ directory
+# In this example config, we tell dbt to build all models in the fullness_tbb/ directory
 # as tables. These settings can be overridden in the individual model files
 # using the `{{ config(...) }}` macro.
 models:
   jaffle_shop:
-    # Config indicated by + and applies to all files under models/example/
+    # Config indicated by + and applies to all files under models/fullness_tbb/
     fullness_tbb:
       +materialized: view
 

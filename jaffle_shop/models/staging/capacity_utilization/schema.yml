@@ -1,0 +1,51 @@
+
+version: 2
+
+models:
+  - name: warehouses
+    description: "all FCs we track"
+    columns:
+      - name: region_id
+        description: "Region ID (int.)"
+      - name: physical_country
+        description: "Country abbreviation"
+      - name: warehouse_id
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
+      - name: site_type
+        description: "the type of FC (ARS, TSSL)"
+    
+
+
+
+  - name: bins_dump
+    description: "bin level data by day"
+    columns:
+      - name: snapshot_day
+      - name: region_id
+      - name: warehouse_id
+      - name: pick_area_name
+      - name: bin_id
+      - name: bin_type_name
+      - name: bin_bay
+      - name: bin_module
+      - name: bin_height
+      - name: rack
+      - name: shelf
+      - name: mrg_key
+        description: "primary key"
+
+
+
+  - name: capacity_utilization
+    description: "capacity utilization of bins + bay level data"
+    columns:
+      - name: snapshot_day
+      - name: warehouse_id
+      - name: bin_id
+      - name: bay_type
+      - name: mrg_key
+        description: "primary key"
+
