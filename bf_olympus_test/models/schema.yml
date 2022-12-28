@@ -3,7 +3,7 @@ version: 2
 
 models:
 
-  - name: warehouses
+  - name: stg_warehouses
     description: "all FCs we track"
     columns:
       - name: region_id
@@ -18,7 +18,7 @@ models:
       - name: site_type
         description: "the type of FC (ARS, TSSL)"
 
-  - name: bins_dump
+  - name: stg_bins_dump
     description: "bin level data by day"
     columns:
       - name: snapshot_day
@@ -37,7 +37,7 @@ models:
 
 
 
-  - name: capacity_utilization
+  - name: stg_capacity_utilization
     description: "capacity utilization of bins + bay level data"
     columns:
       - name: snapshot_day

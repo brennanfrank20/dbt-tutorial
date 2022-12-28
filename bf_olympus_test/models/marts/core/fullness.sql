@@ -1,13 +1,13 @@
 with warehouses as (
-    select * from {{ref('warehouses')}}
+    select * from {{ref('stg_warehouses')}}
 ),
 
 bins_dump as (
-    select * from {{ref('bins_dump')}}
+    select * from {{ref('stg_bins_dump')}}
 ),
 
 capacity_utilization as (
-    select * from {{ref('capacity_utilization')}}
+    select * from {{ref('stg_capacity_utilization')}}
 ),
 
 final_cte as (

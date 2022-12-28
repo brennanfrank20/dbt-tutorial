@@ -1,0 +1,26 @@
+version: 2
+
+sources:
+  - name: bf_olympus_test
+    database: ww_ops_aces_dd
+    schema: test_brs_storedproc
+    tables:
+      - name: dat_brs_ranking_group_eb_update
+
+  - name: bf_olympus_test
+    database: ww_ops_aces_dd
+    schema: "aft-cap-conf"
+    tables:
+      - name: capacity_utilization_v2
+
+
+  - name: bf_olympus_test
+    database: ww_ops_aces_dd
+    schema: aft_cap_conf_ddl
+    tables:
+      - name: bins_dump_v2
+
+
+
+
+      
