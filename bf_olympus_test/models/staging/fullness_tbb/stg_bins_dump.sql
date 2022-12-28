@@ -32,6 +32,6 @@ select
 from {{ source('olympus_bins', 'bins_dump_v2') }} bd  -- aft_cap_conf_ddl.bins_dump_v2 bd
 join {{ ref('stg_warehouses') }} w on bd.warehouse_id = w.warehouse_id
 where true 
-    and bd.region_id=3
-    and bd.snapshot_day='2022-12-15'
+    and bd.region_id = 1
+    and bd.snapshot_day = '2022-12-15'
 group by 1,2,3,4,5,6,7,8,9,10,11

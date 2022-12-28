@@ -79,4 +79,5 @@ bin_tbl as (
     LEFT JOIN bays_dump cu ON bin.mrg_key = cu.mrg_key
 )
 
-select * from bin_tbl
+select * 
+from bin_tbl
