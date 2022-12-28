@@ -23,14 +23,23 @@ models:
   - name: bins_dump
     description: "bin level data by day"
     columns:
-      - name: region_id
-        description: "Region ID (int.)"
-      - name: physical_country
-        description: "Country abbreviation"
-      - name: warehouse_id
-        description: "The primary key for this table"
+      - name: snapshot_day
         tests:
-          - unique
-          - not_null
-      - name: site_type
-        description: "the type of FC (ARS, TSSL)"
+          - not null
+      - name: region_id
+      - name: warehouse_id
+        tests:
+          - not null
+      - name: pick_area_name
+      - name: bin_id
+        tests:
+          - not null
+      - name: bin_type_name
+      - name: bin_bay
+      - name: bin_module
+      - name: bin_height
+      - name: rack
+      - name: shelf
+
+
+
