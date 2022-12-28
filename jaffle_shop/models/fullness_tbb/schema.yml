@@ -34,6 +34,18 @@ models:
       - name: bin_height
       - name: rack
       - name: shelf
+      - name: mrg_key
+        description: "primary key"
 
 
+
+  - name: capacity_utilization
+    description: "capacity utilization of bins + bay level data"
+    columns:
+      - name: snapshot_day
+      - name: warehouse_id
+      - name: bin_id
+      - name: bay_type
+      - name: mrg_key
+        description: "primary key"
 
