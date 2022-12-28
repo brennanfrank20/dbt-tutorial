@@ -34,7 +34,14 @@ clean-targets:         # directories to be removed by `dbt clean`
 models:
   jaffle_shop:
     # Config indicated by + and applies to all files under models/fullness_tbb/
-    fullness_tbb:
-      +materialized: view
+    staging:
+      +schema: staging
+    marts:
+      core:
+        +schema: core
+      reporting:
+        +schema: reporting
+    # fullness_tbb:
+    #   +materialized: view
 
 
