@@ -10,6 +10,7 @@
 
 
 -- Example with multiple sort keys
+-- this config statement overrides anything you have set in your dbt_project.yml file
 {{ config(materialized='table', sort=['warehouse_id', 'snapshot_day']) }}
 
 -- Use the `ref` function to select from other models
