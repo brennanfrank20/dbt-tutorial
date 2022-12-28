@@ -1,5 +1,7 @@
 
--- Use the `ref` function to select from other models
+{{ config(materialized='table') }}
+
+
 
     SELECT
         TRUNC(cu.snapshot_day) AS snapshot_day
