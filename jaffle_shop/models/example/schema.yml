@@ -24,16 +24,10 @@ models:
     description: "bin level data by day"
     columns:
       - name: snapshot_day
-        tests:
-          - not null
       - name: region_id
       - name: warehouse_id
-        tests:
-          - not null
       - name: pick_area_name
       - name: bin_id
-        tests:
-          - not null
       - name: bin_type_name
       - name: bin_bay
       - name: bin_module
