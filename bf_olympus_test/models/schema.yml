@@ -36,13 +36,55 @@ models:
         description: "primary key"
 
 
-
   - name: stg_capacity_utilization
     description: "capacity utilization of bins + bay level data"
     columns:
       - name: snapshot_day
+      - name: region_id
       - name: warehouse_id
+      - name: container_id
       - name: bin_id
+      - name: bin_type
+      - name: bin_usage
+      - name: drop_zone
+      - name: pick_area
+      - name: unique_asin_count
+      - name: max_unique_asin_count
+      - name: total_units
+      - name: total_inventory_volume
+      - name: gross_bin_volume
+      - name: target_utilization
+      - name: capacity
+      - name: shelf
+      - name: bay_id
       - name: bay_type
+      - name: aisle_number
+      - name: aisle
+      - name: pick_mod
       - name: mrg_key
         description: "primary key"
+
+
+
+  - name: core_bin_tbl
+    description: "combines bin ID level and capacity (+baytype) data"
+    columns:
+      - name: snapshot_day
+      - name: region_id
+      - name: warehouse_id
+      - name: pick_area_name
+      - name: bay_type
+      - name: bin_id
+      - name: bin_type_name
+      - name: cumulative_height
+      - name: total_height
+      - name: bin_height_category
+      - name: target_utilization
+      - name: capacity
+      - name: cube
+      - name: units
+      - name: gross_bin_volume
+      - name: mrg_key
+
+
+      

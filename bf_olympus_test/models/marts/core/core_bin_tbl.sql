@@ -1,3 +1,7 @@
+/*
+    This script creates a bin_tbl, which pulls from bins_dump, and joins the bay types from capacity utilization
+*/
+
 with warehouses as (
     select * from {{ref('stg_warehouses')}}
 ),
@@ -6,11 +10,30 @@ bins_dump as (
     select * from {{ref('stg_bins_dump')}}
 ),
 
-capacity_utilization as (
-    select * from {{ref('stg_capacity_utilization')}}
+bays_dump as (
+    select 
+        
+        TRUNC(snapshot_day) AS snapshot_day
+        , warehouse_id
+        , bin_id
+        , COALESCE(bay_type, 'OTHER') as bay_type
+        , COALESCE(bin_type, 'OTHER') as bin_type
+        , substring(bin_id, 1, 5) as mod
+        
+        , avg(capacity) as capacity
+        , avg(target_utilization) as target_utilization
+        , sum(total_inventory_volume) as cube
+        , sum(gross_bin_volume) as gross_bin_volume
+        , sum(total_units) as units
+
+        , TRUNC(snapshot_day) + warehouse_id + bin_id as mrg_key
+
+    from {{ref('stg_capacity_utilization')}} 
+    group by 1,2,3,4,5,6
 ),
 
-final_cte as (
+----- this combines the bin level data with the bay level (capacity) data -----
+bin_tbl as (
     SELECT
           bin.snapshot_day
         , bin.region_id
@@ -21,13 +44,21 @@ final_cte as (
         , bin.bin_type_name
         , bin.cumulative_height
         , bin.total_height
-        , bin.mrg_key
         , CASE
             WHEN bin.bin_type_name LIKE '%KIVA%' THEN 'Floor'
             WHEN bin.total_height > 110 THEN 'Air'
             WHEN bin.cumulative_height > 65 THEN 'High_Floor'
             ELSE 'Floor'
-          END AS pick_type
+          END AS bin_height_category
+        
+
+        , cu.target_utilization
+        , cu.capacity
+        , cu.cube 
+        , cu.units
+        , cu.gross_bin_volume        
+
+        , bin.mrg_key
     FROM (
         SELECT
               a.snapshot_day
@@ -45,7 +76,7 @@ final_cte as (
         FROM bins_dump a
         GROUP BY 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
     ) bin
-    LEFT JOIN capacity_utilization cu ON bin.mrg_key = cu.mrg_key
+    LEFT JOIN bays_dump cu ON bin.mrg_key = cu.mrg_key
 )
 
-select * from final_cte
+select * from bin_tbl

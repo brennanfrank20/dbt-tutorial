@@ -12,13 +12,13 @@
 
 with warehouses as (
 
-    ----- FCs with region partitioning -----
     select regionid as region_id,
            physical_country,
            warehouse_id,
            site_type
     from (
         select warehouse_id,site_type,physical_country,
+        ----- our warehouse table uses region code instead of region ID -----
             case region_id
             when 'NA' then 1
             when 'EU' then 2

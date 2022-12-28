@@ -21,7 +21,7 @@ select
     , bd.warehouse_id
     , bd.pick_area_name
     , bd.bin_id
-    , bd.bin_type_name
+    , COALESCE(bd.bin_type_name, 'OTHER') as bin_type_name
     , bd.bin_bay
     , bd.bin_module
     , bd.bin_height
