@@ -1,6 +1,8 @@
 
 /*
-    VET Data / Tenure, pulling from daily_employee_labor_hours. check bucketing to ensure process path capturing all hours
+    - VET Data / Tenure, pulling from daily_employee_labor_hours
+    - check bucketing to ensure process path capturing all/correct hours 
+        - also, support paths seem to be necessary as pack has more hours in pack support than pack multis or singles)
 */
 
 {{ config(materialized='table', sort=['balance_date']) }}

@@ -127,5 +127,12 @@ models:
       - name: units
 
 
-
-      
+  - name: core_vet_tenure
+    description: "combines bin ID level and capacity (+baytype) data"
+    columns:
+      - name: warehouse_id
+      - name: balance_date
+      - name: process_path
+      - name: vet_hrs
+      - name: total_hrs_worked
+      - name: vet_pct
