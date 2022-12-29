@@ -12,8 +12,8 @@ with capacity_utilization as (
 ),
 
 bin_tbl as (
-    select * from {{ref('stg_capacity_utilization')}} 
-),
+    select * from {{ref('core_bin_tbl')}} 
+)
 
 
 

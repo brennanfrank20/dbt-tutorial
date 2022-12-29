@@ -51,7 +51,7 @@ bin_tbl as (
             , SUM(a.bin_height) OVER (PARTITION BY a.rack ORDER BY a.shelf ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS cumulative_height
             , SUM(a.bin_height) OVER (PARTITION BY a.rack ) AS total_height
         FROM bins_dump a
-        GROUP BY 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+        GROUP BY 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
     ) bin
     LEFT JOIN bays_dump cu ON bin.mrg_key = cu.mrg_key
 )
