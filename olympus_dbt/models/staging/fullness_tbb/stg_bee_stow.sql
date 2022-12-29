@@ -9,8 +9,8 @@ select
     w.region_id
     , edit.warehouse_id
     , edit.person
-    , edit.old_bin_id
-    , edit.new_bin_id AS container
+    , edit.old_bin_id as container
+    , edit.new_bin_id 
     , edit.quantity
     , edit.entry_date as balance_date
     , edit.distributor_order_id

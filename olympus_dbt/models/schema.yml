@@ -115,8 +115,8 @@ models:
       - name: region_id
       - name: warehouse_id
       - name: person
-      - name: old_bin_id
       - name: container
+      - name: new_bin_id
       - name: quantity
       - name: balance_date
       - name: distributor_order_id
