@@ -2,7 +2,7 @@
 /*
     - VET Data / Tenure, pulling from daily_employee_labor_hours
     - check bucketing to ensure process path capturing all/correct hours 
-        - also, support paths seem to be necessary as pack has more hours in pack support than pack multis or singles)
+        - support path seems to be necessary for pack, most the hours are not in Pack Multis or Pack Singles for many sites 
 */
 
 {{ config(materialized='table', sort=['balance_date']) }}
@@ -16,13 +16,13 @@
         trunc(balance_date) as balance_date,
         employee_id,
         employee_login,
-        case when process_name in ('Picking', 'Pick', 'Transfer Out Pick', 'Pick Support', 'V-Returns Pick', 'RC Pick Library') then 'pick'
-            when process_name in ('Stow to Prime', 'Stow to Prime Spt', 'C-Returns Stow', 'Case Stow To Reserve') then 'stow'
+       case when process_name in ('Pick') then 'pick'
+            when process_name in ('Stow to Prime', 'Each to Bin', 'Each Transfer In', 'Case Transfer In', 'Pallet Stow to Prime', 'Case Stow To Reserve') then 'stow'
             when process_name in ('RC Sort') then 'ixd_sort'
             when process_name in ('C-Returns Processed', 'C-Returns Support') then 'relo_crets'
             when process_name in ('Flow Sortation', 'Sort-Flow') then 'afe_flow_sort'
             when process_name in ('Chuting') then 'afe_pack_chuting'
-            when process_name in ('Pack Multis', 'Pack Singles', 'Pack Support', 'V-Returns Pack') then 'pack'
+            when process_name in ('Pack Multis', 'Pack Singles', 'Pack Support') then 'pack'
             when process_name in ('Ship Dock', 'Shipping') then 'ship'
         end as process_path,
         sum(hrs_worked) over (partition by employee_login order by balance_date rows between unbounded preceding and current row) as cumulative_hrs_worked,

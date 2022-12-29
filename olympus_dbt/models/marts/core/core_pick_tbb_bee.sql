@@ -8,7 +8,7 @@ with bee_pick as (
 ),
 
 bin_tbl as (
-    select * from {{ref('stg_bin_tbl')}} 
+    select * from {{ref('core_bin_tbl')}} 
 ),
 
 ----- this combines the bin level data with the bay level (capacity) data -----
@@ -52,7 +52,7 @@ load_table as (
                     WHEN LOWER(a.container) ~ '^(tspt)' THEN 'YELLOW_CART'
                     WHEN LOWER(a.container) ~ '^(ts0)' THEN 'YELLOW_TOTE'
                     ELSE 'OTHER'
-            END                                                          AS container_type
+            END                                                         AS container_type
             , substring(a.old_bin_id, 1, 5)                             AS mod
             , a.bay_type
             , a.bin_type_name
