@@ -77,6 +77,19 @@ models:
       - name: mrg_key
         description: "primary key"
     
+  - name: stg_vet_tenure
+    description: "combines bin ID level and capacity (+baytype) data"
+    columns:
+      - name: warehouse_id
+      - name: balance_date
+      - name: employee_id
+      - name: employee_login
+      - name: process_path
+      - name: cumulative_hrs_worked
+      - name: tenure
+      - name: mrg_key
+
+
 
   - name: core_bin_tbl
     description: "combines bin ID level and capacity (+baytype) data"
@@ -112,6 +125,7 @@ models:
       - name: capacity   
       - name: gross_bin_volume
       - name: units
+
 
 
       

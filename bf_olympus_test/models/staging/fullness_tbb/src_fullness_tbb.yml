@@ -21,5 +21,25 @@ sources:
       - name: bins_dump_v2
 
 
+  - name: olympus_vet_tenure
+    database: ww_ops_aces_dd
+    schema: aftbi_ddl_ext
+    tables:
+      - name: o_daily_employee_labor_hours
+
+
+  - name: olympus_transactions
+    database: ww_ops_aces_dd
+    schema: aftbi_ddl
+    tables:
+      - name: o_labor_processes
+      - name: bin_edit_entries      
+
+
+  - name: olympus_employees
+    database: ww_ops_aces_dd
+    schema: "hcm-phoenix"
+    tables:
+      - name: employee   
 
 
