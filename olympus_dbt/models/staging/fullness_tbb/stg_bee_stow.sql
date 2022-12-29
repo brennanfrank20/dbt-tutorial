@@ -2,7 +2,7 @@
     bin edit entries stow raw data with lag functions
 */
 
-{{ config(materialized='table', sort=['balance_date', 'region_id']) }}
+{{ config(materialized='table', sort=['snapshot_day', 'region_id']) }}
 
 
 select    
@@ -12,7 +12,8 @@ select
     , edit.old_bin_id as container
     , edit.new_bin_id 
     , edit.quantity
-    , edit.entry_date as balance_date
+    , edit.snapshot_day
+    , edit.entry_date
     , edit.distributor_order_id
     , TRUNC(edit.entry_date) + edit.warehouse_id + edit.old_bin_id                                             AS mrg_key
     , LAG(edit.entry_date, 1) OVER (ORDER BY edit.warehouse_id, edit.person, edit.entry_date)                  AS previous_pick_time_utc

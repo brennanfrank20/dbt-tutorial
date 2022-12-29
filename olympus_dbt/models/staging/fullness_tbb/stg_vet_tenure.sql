@@ -1,6 +1,6 @@
 
 /*
-    - VET Data / Tenure, pulling from daily_employee_labor_hours
+    - Vet (tenure) data, pulling from daily_employee_labor_hours
     - check bucketing to ensure process path capturing all/correct hours 
         - support path seems to be necessary for pack, most the hours are not in Pack Multis or Pack Singles for many sites 
 */
@@ -47,8 +47,8 @@
                 where rnk = 1
         ) AS c ON a.employee_id = c.employee_id
         WHERE TRUE
-            and a.warehouse_id='BWI1'
-            and a.balance_date between '2022-12-15'::date - 500 and '2022-12-15'::date
+            and a.warehouse_id='BWI1' -- just for testing
+            and a.balance_date between '2022-12-15'::date - 500 and '2022-12-15'::date 
             AND a.size_category = 'Total'
         GROUP BY 1,2,3,4,5
     ) hrs

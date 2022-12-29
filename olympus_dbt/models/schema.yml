@@ -99,7 +99,8 @@ models:
       - name: old_bin_id
       - name: container
       - name: quantity
-      - name: balance_date
+      - name: snapshot_day      
+      - name: entry_date
       - name: distributor_order_id
       - name: mrg_key
       - name: previous_pick_time_utc
@@ -118,7 +119,8 @@ models:
       - name: container
       - name: new_bin_id
       - name: quantity
-      - name: balance_date
+      - name: snapshot_day
+      - name: entry_date
       - name: distributor_order_id
       - name: mrg_key
       - name: previous_pick_time_utc

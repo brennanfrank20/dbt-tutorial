@@ -11,7 +11,7 @@ bin_tbl as (
     select * from {{ref('core_bin_tbl')}} 
 ),
 
------ this combines the bin level data with the bay level (capacity) data -----
+
 load_table as (
 
     SELECT TRUNC(b.entry_date)    AS balance_date
@@ -21,7 +21,7 @@ load_table as (
         , b.bay_type
         , b.bin_type_name        AS bin_type
         , b.pick_area_name       AS pick_area
-        , b.pick_type
+        , b.bin_height_category
         , b.person
         , b.person + balance_date AS mrg_key
         , SUM(b.cycle_time_secs) AS secs
@@ -57,7 +57,7 @@ load_table as (
             , a.bay_type
             , a.bin_type_name
             , a.pick_area_name
-            , a.pick_type
+            , a.bin_height_category
             , datediff(seconds, a.previous_pick_time_utc, a.entry_date) AS cycle_time_secs
             , a.quantity                                                AS units
         from (
@@ -74,7 +74,7 @@ load_table as (
                     , bns.bay_type
                     , bns.bin_type_name
                     , bns.pick_area_name
-                    , bns.pick_type
+                    , bns.bin_height_category
                 from bee_pick bee
                 left join bin_tbl bns ON bee.mrg_key = bns.mrg_key
         ) a
