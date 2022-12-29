@@ -11,7 +11,7 @@
  select * from (
     select
         warehouse_id,
-        balance_date,
+        trunc(balance_date) as balance_date,
         employee_id,
         employee_login,
         case when process_name in ('Picking', 'Pick', 'Transfer Out Pick', 'Pick Support', 'V-Returns Pick', 'RC Pick Library') then 'pick'
@@ -25,7 +25,7 @@
         end as process_path,
         sum(hrs_worked) over (partition by employee_login order by balance_date rows between unbounded preceding and current row) as cumulative_hrs_worked,
         CASE WHEN cumulative_hrs_worked >= 400 THEN 'VET' ELSE 'NH' END AS tenure,
-        employee_login + balance_date as mrg_key
+        employee_login + trunc(balance_date) as mrg_key
     from (
         SELECT
             a.warehouse_id,
