@@ -36,4 +36,4 @@ join {{ ref('stg_warehouses') }} w on bd.warehouse_id = w.warehouse_id
 where true 
     and bd.region_id = 1
     and bd.snapshot_day = '2022-12-15'
-group by 1,2,3,4,5,6,7,8,9,10,11
+group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14

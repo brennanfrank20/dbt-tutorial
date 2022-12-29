@@ -41,11 +41,13 @@ load_table as (
         , cu.aisle
         , cu.pick_mod
         , cu.floor
-        , bn.is_locked
-        , bn.bin_height_category
+        , bns.is_locked
+        , bns.bin_height_category
     FROM capacity_utilization cu
-    left join bin_tbl bn on cu.mrg_key = bn.mrg_key
-)
+    left join bin_tbl bns on cu.warehouse_id = bns.warehouse_id AND cu.bin_id = bns.bin_id AND TRUNC(cu.snapshot_day) = TRUNC(bns.snapshot_day)
+) -- end load_table
+
+
 
 SELECT
 	 TRUNC(snapshot_day) AS balance_date
