@@ -90,6 +90,45 @@ models:
       - name: mrg_key
 
 
+  - name: stg_bee_pick
+    description: "bin edit entries pick raw data with lag functions"
+    columns:
+      - name: region_id
+      - name: warehouse_id
+      - name: person
+      - name: old_bin_id
+      - name: container
+      - name: quantity
+      - name: balance_date
+      - name: distributor_order_id
+      - name: mrg_key
+      - name: previous_pick_time_utc
+      - name: previous_warehouse_id
+      - name: previous_container
+      - name: previous_bin
+      - name: previous_user_id
+
+
+  - name: stg_bee_stow
+    description: "bin edit entries stow raw data with lag functions"
+    columns:
+      - name: region_id
+      - name: warehouse_id
+      - name: person
+      - name: old_bin_id
+      - name: container
+      - name: quantity
+      - name: balance_date
+      - name: distributor_order_id
+      - name: mrg_key
+      - name: previous_pick_time_utc
+      - name: previous_warehouse_id
+      - name: previous_container
+      - name: previous_bin
+      - name: previous_user_id
+
+
+
 
   - name: core_bin_tbl
     description: "combines bin ID level and capacity (+baytype) data"
