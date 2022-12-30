@@ -23,9 +23,8 @@ load_table as (
         , b.pick_area_name       AS pick_area
         , b.bin_height_category
         , b.person
-        , b.person + balance_date AS mrg_key
-        , SUM(b.cycle_time_secs) AS secs
-        , SUM(b.units)           AS volume
+        , SUM(b.cycle_time_secs) AS cycle_time_secs
+        , SUM(b.units)           AS units
     FROM (
         SELECT a.entry_date
             , a.warehouse_id
@@ -83,10 +82,19 @@ load_table as (
             and a.person = previous_user_id
             and cycle_time_secs between 0 and 4000
     ) b
-    group by 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+    group by 1, 2, 3, 4, 5, 6, 7, 8, 9
 
 
 )
 
-select * 
+ select   
+    balance_date
+    , warehouse_id
+    , container_type
+    , bay_type
+    , bin_type
+    , bin_height_category
+    , SUM(cycle_time_secs) AS secs
+    , SUM(units)           AS volume
 from load_table
+group by 1,2,3,4,5,6

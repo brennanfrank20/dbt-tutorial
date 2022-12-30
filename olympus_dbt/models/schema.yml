@@ -177,3 +177,16 @@ models:
       - name: vet_emps
       - name: total_emps
       - name: vet_pct
+
+
+  - name: core_pick_tbb_bee
+    description: "pick TBB from bin edit entries"
+    columns:
+      - name: balance_date
+      - name: warehouse_id
+      - name: container_type
+      - name: bay_type
+      - name: bin_type
+      - name: bin_height_category
+      - name: secs
+      - name: volume
