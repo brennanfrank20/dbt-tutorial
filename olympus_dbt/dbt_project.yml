@@ -40,11 +40,11 @@ models:
     staging:
       fullness_tbb:
         # +schema: staging # this creates a schema called test_cbrs_sp_staging. the beginning is concatenated from profiles.yml. then updated in macro to remove that.
-        +materialized: table # youtube guy said "view" here for staging tables? 
-    # marts:
-      # core:
+        +materialized: table # youtube guy said "view" here for staging tables
+    marts:
+      core:
+        +materialized: view
         # +schema: core
-        # +materialized: table
       # reporting:
         # +schema: reporting
 

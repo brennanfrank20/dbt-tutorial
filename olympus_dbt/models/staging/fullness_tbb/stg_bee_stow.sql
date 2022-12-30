@@ -21,7 +21,7 @@ select
     , LAG(edit.old_bin_id, 1) OVER (ORDER BY edit.warehouse_id, edit.person, edit.entry_date)                  AS previous_container
     , LAG(edit.new_bin_id, 1) OVER (ORDER BY edit.warehouse_id, edit.person, edit.entry_date)                  AS previous_bin
     , LAG(edit.person, 1) OVER (ORDER BY edit.warehouse_id, edit.person, edit.entry_date)                      AS previous_user_id
-from {{ source('olympus_transactions', 'bin_edit_entries') }} edit -- aftbi_ddl.bin_edit_entries
+from {{ source('aftbi_ddl', 'bin_edit_entries') }} edit -- aftbi_ddl.bin_edit_entries
 join {{ ref('stg_warehouses') }} w on edit.warehouse_id = w.warehouse_id  
 where true
     and edit.region_id = 1 -- just for testing

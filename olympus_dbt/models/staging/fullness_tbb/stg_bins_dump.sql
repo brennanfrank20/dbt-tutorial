@@ -31,7 +31,7 @@ select
     , SUBSTRING(bd.bin_id, 9, 1) AS shelf
     , TRUNC(bd.snapshot_day) + bd.warehouse_id + bd.bin_id as mrg_key
 
-from {{ source('olympus_bins', 'bins_dump_v2') }} bd  -- aft_cap_conf_ddl.bins_dump_v2 bd
+from {{ source('aft_cap_conf_ddl', 'bins_dump_v2') }} bd  -- aft_cap_conf_ddl.bins_dump_v2 bd
 join {{ ref('stg_warehouses') }} w on bd.warehouse_id = w.warehouse_id
 where true 
     and bd.region_id = 1

@@ -4,9 +4,6 @@
 */
 
 
-
-
-
 with capacity_utilization as (
     select * from {{ref('stg_capacity_utilization')}} 
 ),

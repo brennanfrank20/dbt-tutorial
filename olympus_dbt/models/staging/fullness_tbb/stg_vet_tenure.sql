@@ -41,11 +41,11 @@
             b.process_name,
             SUM(a.post_time_seconds)*1.0/3600 as hrs_worked
 
-        from {{ source('olympus_vet_tenure', 'o_daily_employee_labor_hours') }} a -- aftbi_ddl_ext.o_daily_employee_labor_hours a
+        from {{ source('aftbi_ddl_ext', 'o_daily_employee_labor_hours') }} a -- aftbi_ddl_ext.o_daily_employee_labor_hours a
         join {{ ref('stg_warehouses') }} w on a.warehouse_id = w.warehouse_id
-        join {{ source('olympus_transactions', 'o_labor_processes') }} b ON a.process_id = b.process_id
+        join {{ source('aftbi_ddl', 'o_labor_processes') }} b ON a.process_id = b.process_id
         LEFT JOIN (
-            with employee as (select *, row_number() over (partition by emplid order by event_date desc) rnk from {{ source('olympus_employees', 'employee') }})
+            with employee as (select *, row_number() over (partition by emplid order by event_date desc) rnk from {{ source('hcm_phoenix', 'employee') }})
                 select employee_login, emplid as employee_id
                 from employee
                 where rnk = 1

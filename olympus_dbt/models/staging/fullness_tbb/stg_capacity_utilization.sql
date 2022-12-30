@@ -29,7 +29,7 @@
         , cu.floor
 		, cu.pick_mod
         , TRUNC(cu.snapshot_day) + cu.warehouse_id + cu.bin_id as mrg_key
-    from {{ source('olympus_capacity', 'capacity_utilization_v2') }} cu  --"aft-cap-conf".capacity_utilization_v2 AS cu
+    from {{ source('aft_cap_conf', 'capacity_utilization_v2') }} cu  --"aft-cap-conf".capacity_utilization_v2 AS cu
     join {{ ref('stg_warehouses') }} w on cu.warehouse_id = w.warehouse_id   
     where true
         and cu.region_id = 1

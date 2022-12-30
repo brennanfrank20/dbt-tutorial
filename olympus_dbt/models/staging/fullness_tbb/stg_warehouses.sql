@@ -27,7 +27,7 @@ with warehouses as (
             when 'SA' then 5
         	when 'ECCF' then 5
             end as regionid
-        from {{ source('olympus_warehouses', 'dat_brs_ranking_group_eb_update') }} -- test_brs_storedproc.dat_brs_ranking_group_eb_update
+        from {{ source('test_brs_storedproc', 'dat_brs_ranking_group_eb_update') }} -- test_brs_storedproc.dat_brs_ranking_group_eb_update
         where scenario_id=41
         group by 1,2,3,4
     ) x 

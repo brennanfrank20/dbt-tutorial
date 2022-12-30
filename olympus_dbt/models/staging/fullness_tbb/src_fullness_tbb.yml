@@ -1,34 +1,34 @@
 version: 2
 
 sources:
-  - name: olympus_warehouses
+  - name: test_brs_storedproc
     database: ww_ops_aces_dd
     schema: test_brs_storedproc
     tables:
       - name: dat_brs_ranking_group_eb_update
 
-  - name: olympus_capacity
+  - name: aft_cap_conf
     database: ww_ops_aces_dd
     schema: "aft-cap-conf"
     tables:
       - name: capacity_utilization_v2
 
 
-  - name: olympus_bins
+  - name: aft_cap_conf_ddl
     database: ww_ops_aces_dd
     schema: aft_cap_conf_ddl
     tables:
       - name: bins_dump_v2
 
 
-  - name: olympus_vet_tenure
+  - name: aftbi_ddl_ext
     database: ww_ops_aces_dd
     schema: aftbi_ddl_ext
     tables:
       - name: o_daily_employee_labor_hours
 
 
-  - name: olympus_transactions
+  - name: aftbi_ddl
     database: ww_ops_aces_dd
     schema: aftbi_ddl
     tables:
@@ -36,10 +36,14 @@ sources:
       - name: bin_edit_entries      
 
 
-  - name: olympus_employees
+  - name: hcm_phoenix
     database: ww_ops_aces_dd
     schema: "hcm-phoenix"
     tables:
       - name: employee   
 
-
+  - name: aft_pick
+    database: ww_ops_aces_dd
+    schema: "aft-pick-progress-platform"
+    tables:
+      - name: pins_pick_action_bi_v2   

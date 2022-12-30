@@ -12,7 +12,7 @@ select
     , cu.bin_id
     , cu.bay_type
     , TRUNC(cu.snapshot_day) + cu.warehouse_id + cu.bin_id as mrg_key
-FROM {{ source('olympus_capacity', 'capacity_utilization_v2') }} cu
+FROM {{ source('aft_cap_conf', 'capacity_utilization_v2') }} cu
 join {{ ref('stg_warehouses') }} w on cu.warehouse_id = w.warehouse_id   
 where true
     and cu.region_id = 1
