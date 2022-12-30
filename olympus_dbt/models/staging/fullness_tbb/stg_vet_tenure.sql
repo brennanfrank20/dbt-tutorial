@@ -13,6 +13,7 @@
 
  select * from (
     select
+        region_id,
         warehouse_id,
         trunc(balance_date) as balance_date,
         employee_id,
@@ -34,6 +35,7 @@
 
     from (
         SELECT
+            w.region_id,
             a.warehouse_id,
             a.balance_date,
             a.employee_id,
@@ -55,6 +57,6 @@
             and a.warehouse_id='BWI1' -- just for testing
             and a.balance_date between '2022-12-15'::date - 500 and '2022-12-15'::date 
             AND a.size_category = 'Total'
-        GROUP BY 1,2,3,4,5,6
+        GROUP BY 1,2,3,4,5,6,7
     ) hrs
 ) x where process_path is not null

@@ -10,7 +10,7 @@
 
 select
     TRUNC(bd.snapshot_day)     AS snapshot_day
-    , bd.region_id
+    , w.region_id
     , bd.warehouse_id
     , bd.pick_area_name
     , bd.bin_id

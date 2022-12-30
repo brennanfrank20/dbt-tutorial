@@ -10,6 +10,7 @@ with vet_tenure as (
 
 load_table as (
     select 
+        region_id,
         warehouse_id,
         balance_date,
         process_path,
@@ -17,7 +18,7 @@ load_table as (
         count(distinct employee_id) as total_emps,
         vet_emps*1.0/nullif(total_emps,0) as vet_pct
     from vet_tenure
-    group by 1,2,3
+    group by 1,2,3,4
 )
 
 select * 

@@ -1,3 +1,4 @@
+
 /*
     This script creates a bin_tbl, which pulls from bins_dump, and joins the bay types from capacity utilization
 */

@@ -8,7 +8,7 @@
 
 select 
 	TRUNC(cu.snapshot_day) AS snapshot_day
-	, cu.region_id
+	, w.region_id
 	, cu.warehouse_id
 	, cu.container_id
 	, cu.bin_id

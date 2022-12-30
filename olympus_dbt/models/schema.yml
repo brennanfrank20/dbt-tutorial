@@ -70,6 +70,7 @@ models:
   - name: stg_bays_dump
     description: "bay level data for each bin ID"
     columns:
+      - name: region_id    
       - name: snapshot_day
       - name: warehouse_id
       - name: bin_id
@@ -80,6 +81,7 @@ models:
   - name: stg_vet_tenure
     description: "combines bin ID level and capacity (+baytype) data"
     columns:
+      - name: region_id        
       - name: warehouse_id
       - name: balance_date
       - name: employee_id
@@ -153,6 +155,7 @@ models:
   - name: core_fullness
     description: "combines bin ID level and capacity (+baytype) data"
     columns:
+      - name: region_id    
       - name: balance_date
       - name: warehouse_id
       - name: bay_type
@@ -171,6 +174,7 @@ models:
   - name: core_vet_tenure
     description: "combines bin ID level and capacity (+baytype) data"
     columns:
+      - name: region_id    
       - name: warehouse_id
       - name: balance_date
       - name: process_path
@@ -182,6 +186,7 @@ models:
   - name: core_pick_tbb_bee
     description: "pick TBB from bin edit entries"
     columns:
+      - name: region_id    
       - name: balance_date
       - name: warehouse_id
       - name: container_type
@@ -194,6 +199,21 @@ models:
   - name: core_stow_tbb_bee
     description: "stow TBB from bin edit entries"
     columns:
+      - name: region_id    
+      - name: balance_date
+      - name: warehouse_id
+      - name: container_type
+      - name: bay_type
+      - name: bin_type
+      - name: bin_height_category
+      - name: secs
+      - name: volume
+
+
+  - name: core_pick_tbb_aft
+    description: "pick TBB from aft pins pick action bi"
+    columns:
+      - name: region_id
       - name: balance_date
       - name: warehouse_id
       - name: container_type
