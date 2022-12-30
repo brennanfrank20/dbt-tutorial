@@ -1,3 +1,4 @@
+
 /*
     This script defines the logic for stow time between bin, pulled from bin edit entries table (slightly different than aft-stow-progress-platform)
 */

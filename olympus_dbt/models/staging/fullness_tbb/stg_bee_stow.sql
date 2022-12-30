@@ -1,7 +1,9 @@
+
 /*
     bin edit entries stow raw data with lag functions
 */
 
+-- config statements override anything set in dbt_project.yml file
 {{ config(materialized='table', sort=['snapshot_day', 'region_id']) }}
 
 

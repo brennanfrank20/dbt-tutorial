@@ -1,10 +1,11 @@
 
 /*
-    - Vet (tenure) data, pulling from daily_employee_labor_hours
+    Staging table for Vet (tenure) data, pulling from daily_employee_labor_hours
     - check bucketing to ensure process path capturing all/correct hours 
         - support path seems to be necessary for pack, most the hours are not in Pack Multis or Pack Singles for many sites 
 */
 
+-- config statements override anything set in dbt_project.yml file
 {{ config(materialized='table', sort=['balance_date']) }}
 
 

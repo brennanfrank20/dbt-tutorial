@@ -1,13 +1,9 @@
 
 /*
-    Welcome to your first dbt model!
-    Did you know that you can also configure models directly within SQL files?
-    This will override configurations stated in dbt_project.yml
-
-    Try changing "table" to "view" below
+    staging table for FC (warehouse) level data
 */
 
--- Example with one sort key
+-- config statements override anything set in dbt_project.yml file
 {{ config(materialized='table') }}
 
 with warehouses as (

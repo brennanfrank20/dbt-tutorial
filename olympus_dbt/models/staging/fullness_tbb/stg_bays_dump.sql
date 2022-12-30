@@ -1,8 +1,9 @@
 
+/*
+    staging table for capacity utilization BAYS ONLY data
+*/
 
-
--- capacity utilization BAYS ONLY staging table
-
+-- config statements override anything set in dbt_project.yml file
 {{ config(materialized='table', sort=['snapshot_day']) }}
 
 

@@ -1,6 +1,9 @@
 
--- capacity utilization BAYS ONLY staging table
+/*
+    staging table for aft pins pick action bi data
+*/
 
+-- config statements override anything set in dbt_project.yml file
 {{ config(materialized='table', sort=['region_id']) }}
 
 SELECT

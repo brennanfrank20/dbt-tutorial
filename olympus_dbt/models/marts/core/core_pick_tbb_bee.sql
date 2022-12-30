@@ -1,5 +1,7 @@
+
 /*
-    This script defines the logic for pick time between bin, pulled from bin edit entries table (slightly different than aft-pick-progress-platform)
+    This script defines logic for pick time between bin
+    It pulls from bin edit entries table (slightly different than aft-pick-progress-platform)
 */
 
 

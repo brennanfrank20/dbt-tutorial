@@ -1,19 +1,12 @@
--- bins dump staging table
 
 /*
-    Welcome to your second dbt model!
-    Did you know that you can also configure models directly within SQL files?
-    This will override configurations stated in dbt_project.yml
-
-    Try changing "table" to "view" below
+    bins dump staging table
 */
 
 
--- Example with multiple sort keys
--- this config statement overrides anything you have set in your dbt_project.yml file
-{{ config(materialized='table', sort=['warehouse_id', 'snapshot_day']) }}
 
--- Use the `ref` function to select from other models
+-- config statements override anything set in dbt_project.yml file
+{{ config(materialized='table', sort=['warehouse_id', 'snapshot_day']) }}
 
 select
     TRUNC(bd.snapshot_day)     AS snapshot_day
