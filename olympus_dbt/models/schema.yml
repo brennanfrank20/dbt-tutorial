@@ -123,7 +123,7 @@ models:
       - name: entry_date
       - name: distributor_order_id
       - name: mrg_key
-      - name: previous_pick_time_utc
+      - name: previous_stow_time_utc
       - name: previous_warehouse_id
       - name: previous_container
       - name: previous_bin
@@ -181,6 +181,18 @@ models:
 
   - name: core_pick_tbb_bee
     description: "pick TBB from bin edit entries"
+    columns:
+      - name: balance_date
+      - name: warehouse_id
+      - name: container_type
+      - name: bay_type
+      - name: bin_type
+      - name: bin_height_category
+      - name: secs
+      - name: volume
+
+  - name: core_stow_tbb_bee
+    description: "stow TBB from bin edit entries"
     columns:
       - name: balance_date
       - name: warehouse_id
