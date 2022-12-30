@@ -12,9 +12,9 @@ load_table as (
         warehouse_id,
         balance_date,
         process_path,
-        sum(case when tenure='VET' then cumulative_hrs_worked end) as vet_hrs,
-        sum(cumulative_hrs_worked) as total_hrs_worked,
-        vet_hrs*1.0/nullif(total_hrs_worked,0) as vet_pct
+        count(distinct case when cumulative_hrs_worked >= 400 then employee_id end) as vet_emps,
+        count(distinct employee_id) as total_emps,
+        vet_emps*1.0/nullif(total_emps,0) as vet_pct
     from vet_tenure
     group by 1,2,3
 )

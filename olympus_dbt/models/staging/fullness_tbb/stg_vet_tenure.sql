@@ -16,8 +16,10 @@
         trunc(balance_date) as balance_date,
         employee_id,
         employee_login,
-       case when process_name in ('Pick') then 'pick'
-            when process_name in ('Stow to Prime', 'Each to Bin', 'Each Transfer In', 'Case Transfer In', 'Pallet Stow to Prime', 'Case Stow To Reserve') then 'stow'
+
+        case 
+            when process_id=1003001 and process_name in ('Pick') then 'pick'
+            when process_id=1003016 and process_name in ('Stow to Prime', 'Each to Bin', 'Each Transfer In', 'Case Transfer In', 'Pallet Stow to Prime', 'Case Stow To Reserve') then 'stow'
             when process_name in ('RC Sort') then 'ixd_sort'
             when process_name in ('C-Returns Processed', 'C-Returns Support') then 'relo_crets'
             when process_name in ('Flow Sortation', 'Sort-Flow') then 'afe_flow_sort'
@@ -25,15 +27,17 @@
             when process_name in ('Pack Multis', 'Pack Singles', 'Pack Support') then 'pack'
             when process_name in ('Ship Dock', 'Shipping') then 'ship'
         end as process_path,
-        sum(hrs_worked) over (partition by employee_login order by balance_date rows between unbounded preceding and current row) as cumulative_hrs_worked,
-        CASE WHEN cumulative_hrs_worked >= 400 THEN 'VET' ELSE 'NH' END AS tenure,
-        employee_login + trunc(balance_date) as mrg_key
+        
+        sum(hrs_worked) over (partition by employee_id order by balance_date rows between unbounded preceding and current row) as cumulative_hrs_worked
+
+
     from (
         SELECT
             a.warehouse_id,
             a.balance_date,
             a.employee_id,
             c.employee_login,
+            a.process_id,
             b.process_name,
             SUM(a.post_time_seconds)*1.0/3600 as hrs_worked
 
@@ -50,6 +54,6 @@
             and a.warehouse_id='BWI1' -- just for testing
             and a.balance_date between '2022-12-15'::date - 500 and '2022-12-15'::date 
             AND a.size_category = 'Total'
-        GROUP BY 1,2,3,4,5
+        GROUP BY 1,2,3,4,5,6
     ) hrs
 ) x where process_path is not null
