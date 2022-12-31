@@ -35,29 +35,30 @@ load_table as (
             , a.entry_date
             , a.warehouse_id
             , a.person
-            , CASE
-                    WHEN LOWER(a.container) ~ '^(tsx)' THEN 'BLACK_TOTE'
-                    WHEN LOWER(a.container) ~ '^(tsblue|ts000020)' THEN 'BLUE_CART'
-                    WHEN TRUE
-                            AND LOWER(a.container) ~ '^(tscag|tsout|tspic|tshigh|ts000080)'
-                        OR (
-                                    a.warehouse_id IN ('STR1')
-                                AND LOWER(a.container) ~ '^(ts00008)'
-                            ) THEN 'CAGE'
-                    WHEN LOWER(a.container) ~ '^(csx)' THEN 'CASE'
-                    WHEN LOWER(a.container) ~ '^(tsot|ts000030)' THEN 'COLOURED_TOTE'
-                    WHEN LOWER(a.container) ~ '^(tsdmg)' THEN 'DAMAGES'
-                    WHEN LOWER(a.container) ~ '^(tsgoh)' THEN 'GOH_CAGE'
-                    WHEN LOWER(a.container) ~ '^(pax)' THEN 'PALLET'
-                    WHEN LOWER(a.container) ~ '^(tspup)' THEN 'PUP_CAGE'
-                    WHEN LOWER(a.container) ~ '^(tssort)' THEN 'SILVER_CART'
-                    WHEN LOWER(a.container) ~ '^(sc00)' THEN 'SPECIAL_CART'
-                    WHEN LOWER(a.container) ~ '^(tsvna)' THEN 'VNA_CAGE'
-                    WHEN LOWER(a.container) ~ '^(tswhd)' THEN 'WAREHOUSE_DEALS'
-                    WHEN LOWER(a.container) ~ '^(tspt)' THEN 'YELLOW_CART'
-                    WHEN LOWER(a.container) ~ '^(ts0)' THEN 'YELLOW_TOTE'
-                    ELSE 'OTHER'
-            END                                                         AS container_type
+            , test_cbrs_sp.identify_container_types(a.container) as container_type
+            -- , CASE
+            --         WHEN LOWER(a.container) ~ '^(tsx)' THEN 'BLACK_TOTE'
+            --         WHEN LOWER(a.container) ~ '^(tsblue|ts000020)' THEN 'BLUE_CART'
+            --         WHEN TRUE
+            --                 AND LOWER(a.container) ~ '^(tscag|tsout|tspic|tshigh|ts000080)'
+            --             OR (
+            --                         a.warehouse_id IN ('STR1')
+            --                     AND LOWER(a.container) ~ '^(ts00008)'
+            --                 ) THEN 'CAGE'
+            --         WHEN LOWER(a.container) ~ '^(csx)' THEN 'CASE'
+            --         WHEN LOWER(a.container) ~ '^(tsot|ts000030)' THEN 'COLOURED_TOTE'
+            --         WHEN LOWER(a.container) ~ '^(tsdmg)' THEN 'DAMAGES'
+            --         WHEN LOWER(a.container) ~ '^(tsgoh)' THEN 'GOH_CAGE'
+            --         WHEN LOWER(a.container) ~ '^(pax)' THEN 'PALLET'
+            --         WHEN LOWER(a.container) ~ '^(tspup)' THEN 'PUP_CAGE'
+            --         WHEN LOWER(a.container) ~ '^(tssort)' THEN 'SILVER_CART'
+            --         WHEN LOWER(a.container) ~ '^(sc00)' THEN 'SPECIAL_CART'
+            --         WHEN LOWER(a.container) ~ '^(tsvna)' THEN 'VNA_CAGE'
+            --         WHEN LOWER(a.container) ~ '^(tswhd)' THEN 'WAREHOUSE_DEALS'
+            --         WHEN LOWER(a.container) ~ '^(tspt)' THEN 'YELLOW_CART'
+            --         WHEN LOWER(a.container) ~ '^(ts0)' THEN 'YELLOW_TOTE'
+            --         ELSE 'OTHER'
+            -- END                                                         AS container_type
             , substring(a.old_bin_id, 1, 5)                             AS mod
             , a.bay_type
             , a.bin_type_name
