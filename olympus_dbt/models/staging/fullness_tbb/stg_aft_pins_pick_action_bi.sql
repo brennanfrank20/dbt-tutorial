@@ -16,7 +16,7 @@ SELECT
     , bi.userid
     , bi.timestamputc
     , bi.quantityaffected
-    , test_cbrs_sp.identify_container_types(bi.destinationcontainerscannableid) as container_type
+    , test_cbrs_sp.identify_container_types(bi.destinationcontainerscannableid) as container_type_calculated
 
     -- , CASE
     --     WHEN LOWER(bi.destinationcontainerscannableid) ~ '^(tsx)'             THEN 'BLACK_TOTE'
