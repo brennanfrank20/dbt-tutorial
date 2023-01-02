@@ -159,7 +159,15 @@ models:
       - name: faststart_lost_hrs
       - name: strongfinish_lost_hrs
 
-
+  - name: stg_fcfinance_dat_ppr_data_v4
+    description: "fcfinance PPR actual volume and hours for all eight process paths we track in Olympus"
+    columns:
+      - name: region_id
+      - name: warehouse_id
+      - name: balance_date
+      - name: process_id
+      - name: act_vol
+      - name: act_hrs
 
 #---------- core tables -----------#
 
@@ -251,6 +259,18 @@ models:
       - name: bin_height_category
       - name: secs
       - name: volume
+
+
+  - name: core_fcfinance_ppr_v4
+    description: "rollup of the raw PPR actuals per process path"
+    columns:
+      - name: region_id
+      - name: balance_date
+      - name: warehouse_id
+      - name: process_path
+      - name: act_vol
+      - name: act_hrs
+      - name: act_uph
 
 
 #---------- master tables -----------#

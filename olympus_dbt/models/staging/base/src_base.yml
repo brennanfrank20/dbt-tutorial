@@ -55,3 +55,9 @@ sources:
     tables:
       - name: daily_warehouse_fact   
 
+
+  - name: wwbt_bm_sp_tables
+    database: ww_ops_aces_dd
+    schema: wwbt_bm_sp_tables
+    tables:
+      - name: fcfinance_dat_ppr_data_v4   
