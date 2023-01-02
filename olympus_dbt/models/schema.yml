@@ -3,6 +3,9 @@ version: 2
 
 models:
 
+
+#---------- staging tables -----------#
+
   - name: stg_warehouses
     description: "all FCs we track"
     columns:
@@ -132,7 +135,7 @@ models:
       - name: previous_user_id
 
 
-
+#---------- core tables -----------#
 
   - name: core_bin_tbl
     description: "combines bin ID level and capacity (+baytype) data"
@@ -222,3 +225,20 @@ models:
       - name: bin_height_category
       - name: secs
       - name: volume
+
+
+#---------- master tables -----------#
+
+
+  - name: master_stow_non_ar
+    description: "pick TBB from aft pins pick action bi"
+    columns:
+      - name: region_id
+      - name: warehouse_id
+      - name: balance_date
+      - name: bay_type
+      - name: bin_type
+      - name: bin_height_category
+      - name: container_type
+      - name: act_hrs
+      - name: act_vol

@@ -52,7 +52,7 @@ SELECT
 	, COALESCE(bay_type, 'OTHER')                             AS bay_type
 	, COALESCE(bin_type, 'OTHER')                             AS bin_type
 	, COALESCE(bin_height_category, 'OTHER')                  AS bin_height_category
-	, SUBSTRING(bin_id, 1, 5)                                 AS mod
+    , SUBSTRING(bin_id, 1, 5)                                 AS mod 
 	, COALESCE(is_locked, '0')                                AS is_locked
 	, SUM(total_inventory_volume)/ NULLIF(sum(capacity), 0)   AS fullness
 	, AVG(target_utilization)                                 AS target_utilization

@@ -43,6 +43,8 @@ models:
         +materialized: table # youtube guy said "view" here for staging tables
     marts:
       core:
+        +materialized: table
+      master:
         +materialized: view
         # +schema: core
       # reporting:
