@@ -25,25 +25,29 @@ vet_tenure as (
     select * from {{ref('core_vet_tenure')}}
 ),
 
+uit as (
+    select * from {{ref('stg_uit')}}
+),
+
 
 load_table as (
     select
-        s.region_id,
-        s.warehouse_id,
-        s.balance_date,
-        s.bay_type,
-        s.bin_type,
-        s.bin_height_category,
-        s.container_type,
-        s.volume as act_vol,
-        s.secs/3600.0 as act_hrs,
-        act_vol*1.0/nullif(act_hrs,0) as act_uph,
-        f.cube,
-        f.capacity,
-        f.cube*1.0/nullif(f.capacity,0) as fullness_pct,
+        tbb.region_id,
+        tbb.warehouse_id,
+        tbb.balance_date,
+        tbb.bay_type,
+        tbb.bin_type,
+        tbb.bin_height_category,
+        tbb.container_type,
+        tbb.volume                                                          as act_vol,
+        tbb.secs/3600.0                                                     as act_hrs,
+        act_vol*1.0/nullif(act_hrs,0)                                       as act_uph,
+        ful.cube,
+        ful.capacity,
+        ful.cube*1.0/nullif(ful.capacity,0)                                 as fullness_pct,
         case
-            when f.cube = 0 then 'low'
-            when f.capacity = 0 then 'low'
+            when ful.cube = 0 then 'low'
+            when ful.capacity = 0 then 'low'
             when fullness_pct < 0.5 then 'low'
             when fullness_pct < 0.8 then 'med'
             when fullness_pct < 0.9 then 'high'
@@ -51,14 +55,18 @@ load_table as (
             when fullness_pct < 1 then 'reallyhigh'
             when fullness_pct < 1.1 then 'reallyreallyhigh'
             else 'extremelyhigh' 
-        end::varchar(55)                                            as fullness_type,
-        vet_emps,
-        total_emps,
-        vet_pct
+        end::varchar(55)                                                     as fullness_type,
+        vet.vet_emps,
+        vet.total_emps,
+        vet.vet_pct,
+        uit.unknown_idle_time_hours                                          as uit_hrs,
+        uit.total_direct_hours                                               as uit_tot_hrs,
+        uit_hrs*1.0/nullif(uit_tot_hrs,0)                                    as uit_pct
 
-    from stow_tbb_bee s
-    left join fullness f on s.warehouse_id = f.warehouse_id and s.balance_date = f.balance_date and s.bay_type = f.bay_type and s.bin_type = f.bin_type and s.bin_height_category = f.bin_height_category
-    left join vet_tenure v on s.warehouse_id = v.warehouse_id and s.balance_date = v.balance_date and v.process_path = 'stow'
+    from stow_tbb_bee tbb
+    left join fullness ful on tbb.warehouse_id = ful.warehouse_id and tbb.balance_date = ful.balance_date and tbb.bay_type = ful.bay_type and tbb.bin_type = ful.bin_type and tbb.bin_height_category = ful.bin_height_category
+    left join vet_tenure vet on tbb.warehouse_id = vet.warehouse_id and tbb.balance_date = vet.balance_date and vet.process_path = 'stow'
+    left join uit on tbb.warehouse_id = uit.warehouse_id and tbb.balance_date = uit.balance_date and uit.process_path = 'stow'
 )
 
 select * 

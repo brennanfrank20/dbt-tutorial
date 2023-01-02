@@ -135,6 +135,21 @@ models:
       - name: previous_user_id
 
 
+  - name: stg_uit
+    description: "BMI data from wwaces_ddl.daily_warehouse_fact, pulling idle time hrs"
+    columns:
+      - name: region_id
+      - name: warehouse_id
+      - name: balance_date
+      - name: process_path
+      - name: total_productive_hours
+      - name: total_direct_hours
+      - name: unknown_idle_time_hours
+      - name: total_units
+      - name: productive_time_percentage
+
+
+
 #---------- core tables -----------#
 
   - name: core_bin_tbl
@@ -250,4 +265,7 @@ models:
       - name: vet_emps
       - name: total_emps
       - name: vet_pct
+      - name: uit_hrs
+      - name: uit_tot_hrs
+      - name: uit_pct
 

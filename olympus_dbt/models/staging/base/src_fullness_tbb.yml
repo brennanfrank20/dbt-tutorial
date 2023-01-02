@@ -47,3 +47,11 @@ sources:
     schema: "aft-pick-progress-platform"
     tables:
       - name: pins_pick_action_bi_v2   
+
+
+  - name: wwaces_ddl
+    database: ww_ops_aces_dd
+    schema: wwaces_ddl
+    tables:
+      - name: daily_warehouse_fact   
+

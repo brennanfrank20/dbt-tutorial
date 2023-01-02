@@ -38,9 +38,9 @@ models:
   olympus_dbt:
     # Config indicated by + and applies to all files under models/staging/
     staging:
-      fullness_tbb:
-        # +schema: staging # this creates a schema called test_cbrs_sp_staging. the beginning is concatenated from profiles.yml. then updated in macro to remove that.
+      base:
         +materialized: table # youtube guy said "view" here for staging tables
+        # +schema: staging # this creates a schema called test_cbrs_sp_staging. the beginning is concatenated from profiles.yml. then updated in macro to remove that.
     marts:
       core:
         +materialized: table
