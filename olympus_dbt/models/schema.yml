@@ -240,5 +240,14 @@ models:
       - name: bin_type
       - name: bin_height_category
       - name: container_type
-      - name: act_hrs
       - name: act_vol
+      - name: act_hrs
+      - name: act_uph
+      - name: cube
+      - name: capacity
+      - name: fullness_pct
+      - name: fullness_type
+      - name: vet_emps
+      - name: total_emps
+      - name: vet_pct
+
