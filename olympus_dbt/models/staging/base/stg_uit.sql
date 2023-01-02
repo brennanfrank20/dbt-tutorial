@@ -13,6 +13,7 @@ SELECT
     warehouseid                                             AS warehouse_id,
     TRUNC(recorddate)                                       AS balance_date,
     case 
+        -- pick and stow are same here for AR and non-AR
         when scope LIKE '%Pick%' then 'pick'
         when scope LIKE '%Transfer-In/Stow#Each%' OR scope LIKE '%Stow#Each#Prime%' then 'stow'
         when laborprocess='RC Sort' and scope='RC Sort#Each' then 'ixd_sort'
@@ -41,6 +42,8 @@ SELECT
     SUM(unknown_idle_millis)::FLOAT8 / 3600000              AS unknown_idle_time_hours,
     SUM(total_unitcount)                                    as total_units,
     SUM(total_productivemillis)*1.0/nullif(SUM(totalmillis_without_indirect),0) AS productive_time_percentage
+    -- sum(faststart_lostmillis)/3600000.0                     as faststart_lost_hrs,
+    -- sum(strongfinish_lostmillis)/3600000.00                 as strongfinish_lost_hrs,
 FROM {{ source('wwaces_ddl', 'daily_warehouse_fact') }} f
 join {{ ref('stg_warehouses') }} w on f.warehouseid = w.warehouse_id
 

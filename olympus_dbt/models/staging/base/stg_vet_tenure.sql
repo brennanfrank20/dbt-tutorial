@@ -20,6 +20,7 @@
         employee_login,
 
         case 
+            -- pick and stow are same here for AR and non-AR
             when process_id=1003001 and process_name in ('Pick') then 'pick'
             when process_id=1003016 and process_name in ('Stow to Prime', 'Each to Bin', 'Each Transfer In', 'Case Transfer In', 'Pallet Stow to Prime', 'Case Stow To Reserve') then 'stow'
             when process_name in ('RC Sort') then 'ixd_sort'

@@ -149,6 +149,17 @@ models:
       - name: productive_time_percentage
 
 
+  - name: stg_faststart_strongfinish
+    description: "BMI data from wwaces_ddl.daily_warehouse_fact, pulling fast start and strong finish hrs"
+    columns:
+      - name: region_id
+      - name: warehouse_id
+      - name: balance_date
+      - name: process_path
+      - name: faststart_lost_hrs
+      - name: strongfinish_lost_hrs
+
+
 
 #---------- core tables -----------#
 
@@ -246,7 +257,7 @@ models:
 
 
   - name: master_stow_non_ar
-    description: "pick TBB from aft pins pick action bi"
+    description: "non-AR stow metrics aggregated"
     columns:
       - name: region_id
       - name: warehouse_id
@@ -266,6 +277,8 @@ models:
       - name: total_emps
       - name: vet_pct
       - name: uit_hrs
-      - name: uit_tot_hrs
+      - name: total_direct_hrs
       - name: uit_pct
+      - name: faststart_lost_hrs
+      - name: strongfinish_lost_hrs
 

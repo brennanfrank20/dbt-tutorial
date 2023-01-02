@@ -4,7 +4,8 @@
 */
 
 with stow_tbb_bee as (
-    select * from {{ref('core_stow_tbb_bee')}}
+    select * 
+    from {{ref('core_stow_tbb_bee')}}
 ),
 
 fullness as ( -- fullness has more granularities than stow tbb (it also has mod and is_locked dimensions)
@@ -22,13 +23,22 @@ fullness as ( -- fullness has more granularities than stow tbb (it also has mod 
 ),
 
 vet_tenure as (
-    select * from {{ref('core_vet_tenure')}}
+    select * 
+    from {{ref('core_vet_tenure')}}
+    where process_path='stow'
 ),
 
 uit as (
-    select * from {{ref('stg_uit')}}
+    select *
+    from {{ref('stg_uit')}}
+    where process_path='stow'
 ),
 
+faststart_strongfinish as (
+    select * 
+    from {{ref('stg_faststart_strongfinish')}}
+    where process_path='non_ar_stow'
+),
 
 load_table as (
     select
@@ -60,13 +70,16 @@ load_table as (
         vet.total_emps,
         vet.vet_pct,
         uit.unknown_idle_time_hours                                          as uit_hrs,
-        uit.total_direct_hours                                               as uit_tot_hrs,
-        uit_hrs*1.0/nullif(uit_tot_hrs,0)                                    as uit_pct
+        uit.total_direct_hours                                               as total_direct_hrs,
+        uit_hrs*1.0/nullif(total_direct_hrs,0)                               as uit_pct,
+        fssf.faststart_lost_hrs,
+        fssf.strongfinish_lost_hrs
 
     from stow_tbb_bee tbb
     left join fullness ful on tbb.warehouse_id = ful.warehouse_id and tbb.balance_date = ful.balance_date and tbb.bay_type = ful.bay_type and tbb.bin_type = ful.bin_type and tbb.bin_height_category = ful.bin_height_category
-    left join vet_tenure vet on tbb.warehouse_id = vet.warehouse_id and tbb.balance_date = vet.balance_date and vet.process_path = 'stow'
-    left join uit on tbb.warehouse_id = uit.warehouse_id and tbb.balance_date = uit.balance_date and uit.process_path = 'stow'
+    left join vet_tenure vet on tbb.warehouse_id = vet.warehouse_id and tbb.balance_date = vet.balance_date 
+    left join uit on tbb.warehouse_id = uit.warehouse_id and tbb.balance_date = uit.balance_date 
+    left join faststart_strongfinish fssf on tbb.warehouse_id = fssf.warehouse_id and tbb.balance_date = fssf.balance_date
 )
 
 select * 
