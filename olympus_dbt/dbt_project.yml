@@ -45,12 +45,13 @@ models:
       core:
         +materialized: table
       master:
+        +materialized: table
+        # +schema: master
+      master_cbrs:
+        +materialized: table
+        # +schema: master_cbrs
+      reporting:
         +materialized: view
-        # +schema: core
-      # reporting:
-        # +schema: reporting
 
-    # fullness_tbb:
-    #   +materialized: view # bc we are doing config(materialized='table') in staging sql files, this is overridden 
-
+ 
 

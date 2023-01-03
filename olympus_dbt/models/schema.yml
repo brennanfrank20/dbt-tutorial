@@ -284,7 +284,6 @@ models:
       - name: balance_date
       - name: bay_type
       - name: bin_type
-      - name: bin_height_category
       - name: container_type
       - name: act_vol
       - name: act_hrs
@@ -301,4 +300,107 @@ models:
       - name: uit_pct
       - name: faststart_lost_hrs
       - name: strongfinish_lost_hrs
+
+
+#---------- master cbrs tables -----------#
+
+  - name: master_cbrs_stow_non_ar
+    description: "non-AR stow metrics aggregated"
+    columns:
+      - name: region_id
+      - name: warehouse_id
+      - name: ranking_group
+      - name: balance_date
+      - name: bay_type
+      - name: bin_type
+      - name: container_type
+      - name: fullness_type
+      - name: act_vol
+      - name: act_hrs
+      - name: act_uph
+      - name: cube
+      - name: capacity
+      - name: fullness_pct
+      - name: vet_emps
+      - name: total_emps
+      - name: vet_pct
+      - name: vet_target
+      - name: uit_hrs
+      - name: total_direct_hrs
+      - name: uit_pct
+      - name: faststart_lost_hrs
+      - name: strongfinish_lost_hrs
+      - name: stt_upt_target
+      - name: stt_uit_target
+      - name: stt_acu_target
+      - name: stt_cct_target
+      - name: stt_apc_target
+      - name: stt_bpa_target
+      - name: stt_tlst_target
+      - name: stt_bincol_target
+      - name: stt_mix_target
+      - name: cbrs_hours
+      - name: cbrs_hours_act_stt
+      - name: cbrs_hours_stt_upt
+      - name: cbrs_hours_stt_acu
+      - name: cbrs_hours_stt_uit
+      - name: cbrs_hours_stt_cct
+      - name: cbrs_hours_stt_apc
+      - name: cbrs_hours_stt_bpa
+      - name: cbrs_hours_stt_tlst
+      - name: cbrs_hours_stt_bincol
+      - name: cbrs_hours_stt_mix
+
+
+
+      
+#---------- reporting tables -----------#
+
+  - name: final_stow_non_ar
+    description: "non-AR stow metrics aggregated"
+    columns:
+      - name: intervl
+      - name: region_id
+      - name: warehouse_id
+      - name: ranking_group
+      - name: balance_date
+      - name: bay_type
+      - name: bin_type
+      - name: container_type
+      - name: fullness_type
+      - name: act_volume
+      - name: act_hours
+      - name: act_uph
+      - name: total_cube
+      - name: total_capacity
+      - name: fullness_pct
+      - name: vet_employees
+      - name: total_employees
+      - name: vet_pct
+      - name: vet_target
+      - name: uit_hours
+      - name: total_direct_hours
+      - name: uit_pct
+      - name: faststart_lost_hours
+      - name: strongfinish_lost_hours
+      - name: stt_upt_target
+      - name: stt_uit_target
+      - name: stt_acu_target
+      - name: stt_cct_target
+      - name: stt_apc_target
+      - name: stt_bpa_target
+      - name: stt_tlst_target
+      - name: stt_bincol_target
+      - name: stt_mix_target
+      - name: cbrs_hours
+      - name: cbrs_hours_act_stt
+      - name: cbrs_hours_stt_upt
+      - name: cbrs_hours_stt_acu
+      - name: cbrs_hours_stt_uit
+      - name: cbrs_hours_stt_cct
+      - name: cbrs_hours_stt_apc
+      - name: cbrs_hours_stt_bpa
+      - name: cbrs_hours_stt_tlst
+      - name: cbrs_hours_stt_bincol
+      - name: cbrs_hours_stt_mix
 

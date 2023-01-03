@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: cbrs_uph_impacts
+    database: ww_ops_aces_dd
+    schema: cbrs_uph_impacts
+    tables:
+      - name: non_ar_stow

@@ -1,6 +1,6 @@
 
 /*
-    This script aggregates all the non-AR stow olympus metrics into one view -- master_stow_non_ar
+    This script aggregates all the non-AR stow olympus metrics into one table -- master_stow_non_ar
 */
 
 with stow_tbb_bee as ( -- bin height category (formerly stow type) is not included in legacy master table, nor in ASP
